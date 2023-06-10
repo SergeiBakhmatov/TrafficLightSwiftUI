@@ -36,7 +36,7 @@ struct ContentView: View {
                 Button(action: buttonPressed) {
                     Text(buttonTitle)
                         .frame(width: 140, height: 50)
-                        .font(.title)
+                        .font(.title.bold())
                         .foregroundColor(.white)
                 }
             }
@@ -46,6 +46,7 @@ struct ContentView: View {
     }
     
     private func buttonPressed() {
+        
         if buttonTitle == "START" {
             buttonTitle = "NEXT"
         }
@@ -64,7 +65,6 @@ struct ContentView: View {
             greenLight = lightIsOn
             currentLight = .red
         }
-        
     }
     
 }
