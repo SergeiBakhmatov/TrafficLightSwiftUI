@@ -11,41 +11,38 @@ struct ContentView: View {
     
     @State private var buttonTitle = "START"
     
-    @State private var redLight = 0.3
-    @State private var yellowLight = 0.3
-    @State private var greenLight = 0.3
+    @State private var redLightState = 0.3
+    @State private var yellowLightState = 0.3
+    @State private var greenLightState = 0.3
     
     @State private var currentLight = CurrentLight.red
     
-    private let lightIsOn = 1.0
-    private let lightIsOff = 0.3
-    
     var body: some View {
-        VStack {
-            LightView(lightAlpha: redLight, lightColor: .red)
-            LightView(lightAlpha: yellowLight, lightColor: .yellow)
-            LightView(lightAlpha: greenLight, lightColor: .green)
+        VStack(spacing: 20) {
+            LightView(opacity: redLightState, color: .red)
+            LightView(opacity: yellowLightState, color: .yellow)
+            LightView(opacity: greenLightState, color: .green)
             
             Spacer()
             
-            ZStack {
-                Capsule()
-                    .foregroundColor(.gray)
-                    .frame(width: 150, height: 60)
-                    .overlay(Capsule().stroke(Color.black, lineWidth: 4))
-                Button(action: buttonPressed) {
-                    Text(buttonTitle)
-                        .frame(width: 140, height: 50)
-                        .font(.title.bold())
-                        .foregroundColor(.white)
-                }
+            Button(action: buttonPressed) {
+                Text(buttonTitle)
+                    .frame(width: 140, height: 50)
+                    .font(.title.bold())
+                    .foregroundColor(.white)
             }
-            
+            .frame(width: 200, height: 60)
+            .background(.gray)
+            .cornerRadius(15)
         }
+        
         .padding()
     }
     
     private func buttonPressed() {
+        
+        let lightIsOn = 1.0
+        let lightIsOff = 0.3
         
         if buttonTitle == "START" {
             buttonTitle = "NEXT"
@@ -53,16 +50,16 @@ struct ContentView: View {
         
         switch currentLight {
         case .red:
-            greenLight = lightIsOff
-            redLight = lightIsOn
+            greenLightState = lightIsOff
+            redLightState = lightIsOn
             currentLight = .yellow
         case .yellow:
-            redLight = lightIsOff
-            yellowLight = lightIsOn
+            redLightState = lightIsOff
+            yellowLightState = lightIsOn
             currentLight = .green
         case .green:
-            yellowLight = lightIsOff
-            greenLight = lightIsOn
+            yellowLightState = lightIsOff
+            greenLightState = lightIsOn
             currentLight = .red
         }
     }

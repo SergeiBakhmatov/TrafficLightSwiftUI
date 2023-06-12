@@ -11,21 +11,21 @@ import SwiftUI
 
 struct LightView: View {
     
-    let lightAlpha: Double
-    let lightColor: Color
+    let opacity: Double
+    let color: Color
     
     var body: some View {
             Circle()
-                .foregroundColor(lightColor)
-                .opacity(lightAlpha)
+                .foregroundColor(color)
+                .opacity(opacity)
                 .overlay(Circle().stroke(Color.black, lineWidth: 4))
-                .frame(width: 150, height: 150)
+                .frame(width: 150)
     }
 }
 
 struct TrafficLightView_Previews: PreviewProvider {
     static var previews: some View {
-        LightView(lightAlpha: 1, lightColor: .red)
+        LightView(opacity: 1, color: .red)
     }
 }
 
